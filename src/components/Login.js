@@ -1,10 +1,15 @@
 import React from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import './GoogleBtn.css'
-import { loginGoogle, loginEmailPassword, loginFacebook } from "./redux/actions/actionLogin";
+import "../styles/GoogleBtn.css";
+import {
+  loginGoogle,
+  loginEmailPassword,
+  loginFacebook,
+} from "../redux/actions/actionLogin";
 
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,7 +21,7 @@ const Login = () => {
       password: "",
     },
     onSubmit: (data) => {
-      console.log(data);
+     
       dispatch(loginEmailPassword(data));
       // navigate("/");
     },
@@ -26,16 +31,16 @@ const Login = () => {
     dispatch(loginGoogle());
     // navigate("/");
   };
-  const handleFacebook= () => {
+  const handleFacebook = () => {
     dispatch(loginFacebook());
     // navigate("/");
   };
 
   return (
-    <div>
+    <div className="divlog">
       <form className="form-group" onSubmit={formik.handleSubmit}>
         <label>Correo electrónico</label>
-       
+
         <input
           id="inputEmailSignIn"
           type="email"
@@ -47,7 +52,7 @@ const Login = () => {
           onChange={formik.handleChange}
         />
         <label>Contraseña</label>
-        
+
         <input
           id="inputpasswordSignIn"
           type="password"
@@ -61,18 +66,12 @@ const Login = () => {
 
         <br></br>
         <div className="d-grid gap-2 mx-auto mt-2">
-          <button
-            value="Save"
-            type="submit"
-            className="btn btn-warning"
-            variant="warning"
-          >
+          <Button value="Save" type="submit" variant="outline-primary">
             Ingresar
-          </button>
+          </Button>
         </div>
         <br></br>
-       
-        <br></br>
+
         <div className="google-btn" onClick={handleGoogle}>
           <div className="google-icon-wrapper">
             <img
@@ -86,14 +85,16 @@ const Login = () => {
           </p>
         </div>
         <br></br>
-        
-        <img  onClick={handleFacebook}
-              className="face-icon"
-              src="https://scontent.feoh4-3.fna.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ad8a9d&_nc_eui2=AeGuNfqzKUEqyoe9TXtNuhyTDpRKUGl8lBMOlEpQaXyUE0eONNlAaXo9dvUfEaw_MjOGEu0OH1fUkcPG06d-uBV4&_nc_ohc=7OIt3P9C1a4AX8w0tH8&_nc_ht=scontent.feoh4-3.fna&oh=00_AT80QfKiSQ3t8hZWNvUeCROBcCLzim25co5kFo0nb4Xi_g&oe=62216A16"
-              alt=""
-            />
+
+        <img
+          onClick={handleFacebook}
+          className="face-icon"
+          src="https://scontent.feoh4-3.fna.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=105&ccb=1-5&_nc_sid=ad8a9d&_nc_eui2=AeGuNfqzKUEqyoe9TXtNuhyTDpRKUGl8lBMOlEpQaXyUE0eONNlAaXo9dvUfEaw_MjOGEu0OH1fUkcPG06d-uBV4&_nc_ohc=7OIt3P9C1a4AX8w0tH8&_nc_ht=scontent.feoh4-3.fna&oh=00_AT80QfKiSQ3t8hZWNvUeCROBcCLzim25co5kFo0nb4Xi_g&oe=62216A16"
+          alt=""
+        />
         <br></br>
-        <h6 onClick={() =>  navigate("/registro")}>
+        <br></br>
+        <h6 onClick={() => navigate("/registro")} className="linklogintitle">
           {" "}
           ¿Deseas crear una cuenta? Haz click aqui
         </h6>

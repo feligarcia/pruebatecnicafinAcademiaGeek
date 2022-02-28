@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { createUserActionAsincrono } from "./redux/actions/actionLogin";
-import { imgUpload } from "./imgUpload";
+import { createUserActionAsincrono } from "../redux/actions/actionLogin";
+import { imgUpload } from "../functions/imgUpload";
 import { useNavigate } from "react-router-dom";
-
-
+import { Button } from "react-bootstrap";
 
 const Registro = () => {
   const navigate = useNavigate();
@@ -21,7 +20,6 @@ const Registro = () => {
     onSubmit: (data) => {
       data.image = imageURL;
       dispatch(createUserActionAsincrono(data));
-      
     },
   });
 
@@ -36,7 +34,7 @@ const Registro = () => {
   };
 
   return (
-    <div>
+    <div className="divlog">
       <form className="form-group" onSubmit={formik.handleSubmit}>
         <label>Nombre</label>
         <input
@@ -83,17 +81,12 @@ const Registro = () => {
         />
         <br></br>
         <div className="d-grid gap-2 mx-auto mt-2">
-          <button
-            value="Save"
-            type="submit"
-            className="btn btn-warning"
-            variant="warning"
-          >
+          <Button value="Save" type="submit" variant="outline-primary">
             Registrar
-          </button>
+          </Button>
         </div>
         <br></br>
-        <h6 onClick={() => navigate("/login")}>
+        <h6 onClick={() => navigate("/login")} className="linklogintitle">
           ¿Ya tienes una cuenta? Haz click aqui
         </h6>
       </form>

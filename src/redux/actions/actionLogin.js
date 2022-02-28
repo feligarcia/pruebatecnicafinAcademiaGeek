@@ -14,8 +14,11 @@ export const loginFacebook = () => {
     const auth = getAuth();
     signInWithPopup(auth, facebook)
       .then(({ user }) => {
-        console.log(user)
-        dispatch(loginSincronico(user.uid, user.displayName, user.email, user.photoURL));
+        console.log(user);
+        dispatch(
+          loginSincronico(user.uid, user.displayName, user.email, user.photoURL)
+        );
+        console.log("Ingreso OK");
       })
       .catch((e) => {
         console.log(e);
@@ -28,7 +31,10 @@ export const loginGoogle = () => {
     const auth = getAuth();
     signInWithPopup(auth, google)
       .then(({ user }) => {
-        dispatch(loginSincronico(user.uid, user.displayName, user.email, user.photoURL));
+        dispatch(
+          loginSincronico(user.uid, user.displayName, user.email, user.photoURL)
+        );
+        console.log("Ingreso OK");
       })
       .catch((e) => {
         console.log(e);
@@ -39,7 +45,6 @@ export const loginGoogle = () => {
 export const loginEmailPassword = (logUser) => {
   return (dispatch) => {
     const auth = getAuth();
-
     signInWithEmailAndPassword(auth, logUser.email, logUser.password)
       .then(({ user }) => {
         dispatch(loginSincronico(user.uid, user.displayName, user.email));
@@ -58,25 +63,24 @@ export const loginSincronico = (id, displayname, email, image) => {
       id,
       displayname,
       email,
-      image
+      image,
     },
   };
 };
 
 export const logoutAsincrono = () => {
-    return(dispatch) => {
-       const auth = getAuth();
-       signOut(auth)
-       .then((user) => {
-         dispatch(logoutSincrono())
-          console.log('Ha salido satisfactoriamente')
-
-       })
-       .catch(error => {
-           console.log(error)
-       })
-    }
-}
+  return (dispatch) => {
+    const auth = getAuth();
+    signOut(auth)
+      .then((user) => {
+        dispatch(logoutSincrono());
+        console.log("Ha salido satisfactoriamente");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
 
 export const logoutSincrono = () => {
   return {
@@ -86,7 +90,6 @@ export const logoutSincrono = () => {
 };
 
 export const createUserActionAsincrono = (newUser) => {
- 
   return (dispatch) => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, newUser.email, newUser.password)

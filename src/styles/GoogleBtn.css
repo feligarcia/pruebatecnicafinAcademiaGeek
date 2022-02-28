@@ -6,6 +6,7 @@
 --button-active-blue: #1669F2;
 }
 .google-btn {
+  margin: 0 auto;
   width: 184px;
   height: 42px;
   background-color: var(--google-blue);
@@ -22,8 +23,8 @@
   }
   .google-icon {
     position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
+    left:0px;
+   margin: 10px;
     width: 18px;
     height: 18px;
     background-color: initial;

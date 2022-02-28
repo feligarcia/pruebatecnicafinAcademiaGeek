@@ -3,4 +3,5 @@ export const types = {
   login: 'Login User',
   register: 'Register User',
   logout: 'Logout User',
+  search: 'search Pokemon'
 };

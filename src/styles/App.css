@@ -38,9 +38,21 @@
 }
 
 .cardpokemon{
+  
   animation-name: desvanecerInicio;
   animation-duration: 2s;
 }
+
+.imgpokefront{
+width: 350px;
+height: 350px;
+}
+.imgpokeback{
+  margin: 0 auto;
+  width: 180px !important;
+  height: 180px !important;
+}
+
 @keyframes desvanecerInicio {
   0%{
     opacity: 0;
@@ -54,18 +66,45 @@
     opacity: 1;
   }
 }
+.imgpoke{
+  width: 200px;
+  height: 200px;
+}
+.cardpoke:hover{
+border: 2px solid #2b007a;
+background-color: aliceblue;
+}
+.divlog{
+width: 400px;
+height: fit-content;
+margin: 50px auto;
+}
+
+.face-icon{
+width: 200px;
+
+}
+.linklogintitle:hover{
+  color:rgb(173, 3, 3);
+}
+
+.icon-avatar{
+  width: 40px;
+  height: 40px;
+}
+
 
 .loader,
 .loader:before,
 .loader:after {
-  background: #fed941;
+  background: #ff0080;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
 }
 .loader {
-  color: #fed941;
+  color: #ff0080;
   text-indent: -9999em;
   margin: 88px auto;
   position: relative;

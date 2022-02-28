@@ -1,7 +1,8 @@
 import {types} from '../types/types'
 
 const initialState = {
-Pokemons:{},
+favPokemons:[],
+search:''
 
 }
 
@@ -11,7 +12,11 @@ export const appReducer = (state = initialState, action) => {
   case types.listar:
     return { ...state}
 
-
+    case types.search:
+      return {
+        ...state,
+        search: action.payload,
+      };
 
   default:
     return state
