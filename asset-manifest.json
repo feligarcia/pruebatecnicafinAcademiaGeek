@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pruebatecnicafinAcademiaGeek/static/css/main.cd9fd8d7.css",
+    "main.js": "/pruebatecnicafinAcademiaGeek/static/js/main.9022f431.js",
+    "index.html": "/pruebatecnicafinAcademiaGeek/index.html",
+    "main.cd9fd8d7.css.map": "/pruebatecnicafinAcademiaGeek/static/css/main.cd9fd8d7.css.map",
+    "main.9022f431.js.map": "/pruebatecnicafinAcademiaGeek/static/js/main.9022f431.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cd9fd8d7.css",
+    "static/js/main.9022f431.js"
+  ]
+}
