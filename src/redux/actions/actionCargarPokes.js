@@ -1,3 +1,4 @@
+//esta accion no se esta usando, pero se deja como posible solucion
 import axios from "axios";
 import { types } from "../types/types";
 
@@ -27,7 +28,7 @@ export const actionCargarPokesASINCRO = () => {
               console.log(e);
             });
         });
-        dispatch(actionCargarPokesSincro(lista))
+        dispatch(actionCargarPokesSincro(lista));
       })
       .catch((e) => {
         console.log(e);

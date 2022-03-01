@@ -8,7 +8,7 @@ import Registro from "../components/Registro";
 
 describe("Validar rutas con inicio de sesion", () => {
   test("Validar render de <LoginRoutes /> con <Login />", () => {
-    const isLogin = true;
+    const isLogin = false;
     const wrapper = shallow(
       <LoginRoutes isAuthenticated={isLogin} children={<Login />} />
     );
@@ -16,7 +16,7 @@ describe("Validar rutas con inicio de sesion", () => {
   });
 
   test("Validar render de <LoginRoutes /> con <Registro />", () => {
-    const isLogin = true;
+    const isLogin = false;
     const wrapper = shallow(
         <LoginRoutes isAuthenticated={isLogin} children={<Registro />} />
       );

@@ -36,7 +36,7 @@ function App() {
   }
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Navbarapp isLogin={isLogin} />
         <Routes>
           <Route path="/" element={<ListCard />} />
@@ -62,7 +62,7 @@ function App() {
 
           
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
