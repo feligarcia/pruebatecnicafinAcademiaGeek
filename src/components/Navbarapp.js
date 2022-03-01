@@ -6,8 +6,7 @@ import {
   InputGroup,
   Nav,
   Navbar,
-  Col,
-  Row,
+ 
 } from "react-bootstrap";
 import { logoutAsincrono } from "../redux/actions/actionLogin";
 import { useDispatch } from "react-redux";
@@ -15,8 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { actionSearch } from "../redux/actions/actionSearch";
 
-const Navbarapp = ({isLogin}) => {
- 
+const Navbarapp = ({ isLogin }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -39,7 +37,8 @@ const Navbarapp = ({isLogin}) => {
             PokeApi by JFGG
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link onClick={() => navigate("/")}>Inicio</Nav.Link>
+            <Nav.Link onClick={() => navigate("/") } >Inicio</Nav.Link>
+            <p id='clickinicio'>.</p>
           </Nav>
 
           <form onSubmit={formik.handleSubmit}>
@@ -53,28 +52,28 @@ const Navbarapp = ({isLogin}) => {
               />
               {isLogin ? (
                 <>
-                
-                <Button
-                  variant="danger"
-                  onClick={() => dispatch(logoutAsincrono())}
-                >
-                  Cerrar sesion
-                </Button>
-                <img
-                 alt=""
-                 src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                 className="icon-avatar"
-                 onClick={() => navigate("/favorites")}
-               />
+                  <Button
+                    variant="danger"
+                    onClick={() => {
+                      dispatch(logoutAsincrono());
+                      navigate("/");
+                    }}
+                  >
+                    Cerrar sesion
+                  </Button>
+                  <img
+                    alt=""
+                    src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                    className="icon-avatar"
+                    // onClick={() => window.open('/favorites','_self')}
+                    onClick={() => navigate('/favorites')}
+                    //al guardar pokemon se guarda objeto sin array y me muestra error, por eso se recarga favorites
+                  />
                 </>
               ) : (
-                <Button
-                  variant="primary"
-                  onClick={() => navigate("/login")}
-                >
+                <Button variant="primary" onClick={() => navigate("/login")}>
                   Ingresar
                 </Button>
-               
               )}
             </InputGroup>
           </form>

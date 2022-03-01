@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { Card, ListGroup, Row } from "react-bootstrap";
-// import { getPokemon } from "./getPokemons";
+// import { getPokemons } from "../functions/getPokemons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+// import { actionCargarPokesASINCRO } from "../redux/actions/actionCargarPokes";
 
-const ListCard = () => {
+
+const ListCard =   () => {
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [pokemons, setPokemons] = useState([]);
   const { search } = useSelector((store) => store.app);
+  // const { listpokemons } = useSelector((store) => store.app);
   useEffect(() => {
+    // dispatch(actionCargarPokesASINCRO())
+    //  setTimeout(()=>{setIsLoading(false)},1000)
+   
     if (isLoading) {
-      const getPokemon = () => {
+        const getPokemon = async () => {
         const lista = [];
-        axios
+        await  axios
           .get("https://pokeapi.co/api/v2/pokemon/?limit=25&offset=25")
           .then((resp) => {
             const data = resp.data.results;
             data.forEach((pokemon) => {
               axios
                 .get(pokemon.url)
-                .then((resp) => {
+                .then(async(resp) => {
                   const detalle = resp.data;
                   const poke = {
                     id: detalle.id,
@@ -32,7 +39,7 @@ const ListCard = () => {
                     tipo2: detalle.types[1]?.type.name,
                     experiencia: detalle.base_experience,
                   };
-                  lista.push(poke);
+                await  lista.push(poke);
                 })
                 .catch((e) => {
                   console.log(e);
@@ -40,38 +47,46 @@ const ListCard = () => {
             });
 
             setPokemons(lista);
-            setIsLoading(false);
+            setTimeout(()=>{setIsLoading(false)},500)
+            
           })
           .catch((e) => {
             console.log(e);
           });
       };
-      getPokemon();
-    }
-  }, [isLoading]);
+       getPokemon()
+      }
+  
+    
+  
+  }, []);
+ 
   const handleCardDetail = (id) => {
     navigate(`/pokemon/${id}`);
   };
 
   const filterPoke = (search, poke) => {
     search = search?.toLocaleLowerCase();
-    return poke.filter((pokemon) =>
+    return poke?.filter((pokemon) =>
       pokemon.nombre.toLocaleLowerCase().includes(search)
     );
   };
-  const pokefiltrado = filterPoke(search, pokemons);
+  const pokefiltrado =  filterPoke(search, pokemons);
 
-  console.log(pokemons);  
+ 
   console.log(isLoading);
-  if (isLoading) {
+  // console.log(pokemons);
+  
+  if (isLoading) { 
     return <Loader />;
   }
-  console.log(pokemons);
+ 
   console.log(isLoading);
   return (
     <div>
+     
       <Row xs={1} md={3} className="g-4">
-        {pokefiltrado.map((pokemon) => (
+        {pokefiltrado?.map((pokemon) => (
           <Card
             key={pokemon.id}
             onClick={() => handleCardDetail(pokemon.id)}

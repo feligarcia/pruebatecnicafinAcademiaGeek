@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import {
+  
+  
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { Card, Row, ListGroup, Button } from "react-bootstrap";
 import axios from "axios";
 import Loader from "./Loader";
+import { useDispatch } from "react-redux";
+import { regisFavASincrono } from "../redux/actions/favActions";
 
 const CardDetail = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [pokemon, setPokemon] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const location = useLocation();
+
   const params = useParams();
 
   useEffect(() => {
@@ -15,7 +24,7 @@ const CardDetail = () => {
       .get(`https://pokeapi.co/api/v2/pokemon/${params.id}`)
       .then((resp) => {
         const detalle = resp.data;
-      
+
         const poke = {
           id: detalle.id,
           nombre: detalle.name,
@@ -41,7 +50,8 @@ const CardDetail = () => {
   if (isLoading) {
     return <Loader />;
   }
- 
+
+  const useruid = JSON.parse(localStorage.getItem("userPoke"))?.uid;
 
   return (
     <div>
@@ -68,7 +78,20 @@ const CardDetail = () => {
           <Card.Title>
             <h1>{pokemon.nombre}</h1>
           </Card.Title>
-          <Card.Header><Button variant="info">Agregar <b>{pokemon.nombre}</b> a favoritos</Button> </Card.Header>
+          <Card.Header>
+            <Button
+              variant="info"
+              onClick={() => {
+                if (useruid) {
+                  dispatch(regisFavASincrono(pokemon, useruid));
+                } else {
+                  navigate("/login");
+                }
+              }}
+            >
+              Agregar <b>{pokemon.nombre}</b> a favoritos
+            </Button>{" "}
+          </Card.Header>
           <ListGroup variant="flush">
             <ListGroup.Item>
               Tipo: {pokemon.tipo},{pokemon.tipo2}{" "}
@@ -85,7 +108,9 @@ const CardDetail = () => {
           </ListGroup>
         </Card.Body>
         <Card.Footer>
-          <small className="text-muted">Detalles de: {pokemon.nombre} | {pokemon.id}</small>
+          <small className="text-muted">
+            Detalles de: {pokemon.nombre} | id: {pokemon.id}
+          </small>
         </Card.Footer>
       </Card>
     </div>

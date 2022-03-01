@@ -9,6 +9,7 @@ import Favorites from "../components/Favorites";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { LoginRoutes } from "./LoginRoutes";
 
 function App() {
   const [checking, setChecking] = useState(true);
@@ -19,12 +20,12 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user?.uid) {
         setIsLogin(true);
-        const {displayName, email, photoURL} = user
-        const sesion = {displayName,email,photoURL}
-        localStorage.setItem('userPoke', JSON.stringify(sesion))
+        const { uid, displayName, photoURL } = user;
+        const sesion = {  uid, displayName, photoURL };
+        localStorage.setItem("userPoke", JSON.stringify(sesion));
       } else {
         setIsLogin(false);
-        localStorage.removeItem('userPoke')
+        localStorage.removeItem("userPoke");
       }
       setChecking(false);
     });
@@ -39,10 +40,27 @@ function App() {
         <Navbarapp isLogin={isLogin} />
         <Routes>
           <Route path="/" element={<ListCard />} />
-          <Route path="/pokemon/:id" element={<CardDetail />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
+          <Route path="/pokemon/:id" element={<CardDetail />} />        
           <Route path="/favorites" element={<Favorites />} />
+
+          <Route
+            path="/login"
+            element={
+              <LoginRoutes isAuthenticated={isLogin}>
+                <Login />
+              </LoginRoutes>
+            }
+          />
+          <Route
+            path="/registro"
+            element={
+              <LoginRoutes isAuthenticated={isLogin}>
+                <Registro />
+              </LoginRoutes>
+            }
+          />
+
+          
         </Routes>
       </BrowserRouter>
     </div>

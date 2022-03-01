@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Validar rutas con inicio de sesion Validar render de <LoginRoutes /> con <Login /> 1`] = `<Login />`;
+
+exports[`Validar rutas con inicio de sesion Validar render de <LoginRoutes /> con <Registro /> 1`] = `<Registro />`;

@@ -14,9 +14,9 @@ export const loginFacebook = () => {
     const auth = getAuth();
     signInWithPopup(auth, facebook)
       .then(({ user }) => {
-        console.log(user);
+        // console.log(user);
         dispatch(
-          loginSincronico(user.uid, user.displayName, user.email, user.photoURL)
+          loginSincronico(user.uid, user.displayName, user.photoURL)
         );
         console.log("Ingreso OK");
       })
@@ -32,7 +32,7 @@ export const loginGoogle = () => {
     signInWithPopup(auth, google)
       .then(({ user }) => {
         dispatch(
-          loginSincronico(user.uid, user.displayName, user.email, user.photoURL)
+          loginSincronico(user.uid, user.displayName, user.photoURL)
         );
         console.log("Ingreso OK");
       })
@@ -47,7 +47,7 @@ export const loginEmailPassword = (logUser) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, logUser.email, logUser.password)
       .then(({ user }) => {
-        dispatch(loginSincronico(user.uid, user.displayName, user.email));
+        dispatch(loginSincronico(user.uid, user.displayName, user.photoURL));
         console.log("Ingreso OK");
       })
       .catch((e) => {
@@ -56,13 +56,12 @@ export const loginEmailPassword = (logUser) => {
   };
 };
 
-export const loginSincronico = (id, displayname, email, image) => {
+export const loginSincronico = (uid, displayname,  image) => {
   return {
     type: types.login,
     payload: {
-      id,
-      displayname,
-      email,
+      uid,
+      displayname,      
       image,
     },
   };

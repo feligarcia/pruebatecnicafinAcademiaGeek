@@ -21,7 +21,6 @@ const Login = () => {
       password: "",
     },
     onSubmit: (data) => {
-     
       dispatch(loginEmailPassword(data));
       // navigate("/");
     },
@@ -70,6 +69,7 @@ const Login = () => {
             Ingresar
           </Button>
         </div>
+        <p>Puedes probar con prueba@prueba.com | 123456</p>
         <br></br>
 
         <div className="google-btn" onClick={handleGoogle}>
